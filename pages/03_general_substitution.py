@@ -1,21 +1,22 @@
 import streamlit as st
 from cryptography.common import *
-from cryptography.caesarcipher import *
+from cryptography.generalsubstitution import *
 
-st.header("Caesar cipher")
+st.header("General substitution cipher")
 
 st.markdown("""
-Julius Caesar used different techniques for secret writing. One of his known substitution ciphers consists 
-of shifting the letters in the alphabet a constant number of positions. Each letter in a plain message is 
-replaced by the letter that is, say, 3 positions ahead in the alphabet [1].
+The strength of a cipher system depends on keeping the *key* secret and on having a wide range of potential keys [1].
+The Caesar Cipher is not very strong because it only has 25 possible keys (shift positions) but if instead we allow for any
+possible combination of the plain alphabet, then we would have an immense set of keys:
 
+  *P(n,r) = P(26,26) = 403291461126605635584000000*
+  
 ## Implementation
     
 ### 1. The Plain Alphabet
 
 We establish the valid plain alphabet. Let's take, for example, the 26 letters in the english 
 language alphabet.
-
 """)
 
 # alphabet
@@ -25,30 +26,14 @@ st.markdown(':blue[Plain alphabet:] {}'.format(pa))
 
 st.markdown("""
 ### 2. The Key
-
-The Key is the exact cipher alphabet to be used in the encryption.
-
-The key shifts each character in the plain alphabet by N positions. 
-
+A random sequence of the characters in the plain alphabet 
 """)
 
-snippet = '''
-def cc_generate_cipher(alphabet, n_shift_positions):
-    cipher = []
-    alphabet_len = len(alphabet)
-    for p in range(alphabet_len):
-        c = (p + n_shift_positions) % alphabet_len
-        cipher.append(alphabet[c])
-    return cipher
-'''
-st.code(snippet)
+cipher_alphabet = gs_generate_cipher(pa)
 
+if st.button('Push to re-generate the Key'):
+    cipher_alphabet = gs_generate_cipher(pa)
 
-n_shift_positions = st.slider('Shift Positions', 1, 25, 3)
-st.markdown("""
-*In the case of our example there are 25 possible keys.*
-""")
-cipher_alphabet = cc_generate_cipher(pa, n_shift_positions)
 st.markdown(':blue[Key (cipher alphabet):] {}'.format(cipher_alphabet))
 
 st.markdown("""
@@ -91,3 +76,4 @@ st.markdown("""
 
 [1] Singh, Simon, The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography. New York, Anchor Books, 2000. Singh, Simon. The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography.
 """)
+
