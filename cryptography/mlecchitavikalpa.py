@@ -1,27 +1,24 @@
-import string
 import random
 
-def CipherMlecchitaVikalpa(input, alphabet, cipherSet1, cipherSet2):
+
+def cipher_mlecchita_vikalpa(message, alphabet, cipherset1, cipherset2):
     output = ""
-    for p in input:
+    for p in message:
         if p in alphabet:  # any non-alphabethic character will be lost
             inx = -1
             c = ""
-            if p in cipherSet1:
-                inx = cipherSet1.index(p)
-                c = cipherSet2[inx]
+            if p in cipherset1:
+                inx = cipherset1.index(p)
+                c = cipherset2[inx]
             else:
-                inx = cipherSet2.index(p)
-                c = cipherSet1[inx]
+                inx = cipherset2.index(p)
+                c = cipherset1[inx]
             output += c
 
     return output
 
-def GenerateAlphabet():
-    return string.ascii_lowercase
 
-
-def GenerateCipherSets(alphabet):
+def mv_generate_cipher_sets(alphabet):
     random.seed()
     # select half of the characters in the alphabet randomly in Set #1
     setLen = int(len(alphabet) / 2)

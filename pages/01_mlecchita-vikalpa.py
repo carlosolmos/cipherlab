@@ -1,11 +1,9 @@
 import streamlit as st
-import random
-import string
 from cryptography.mlecchitavikalpa import *
+from cryptography.common import *
 
-random.seed()
 
-st.title('mlecchita-vikalpa - the Art of Secret Writing')
+st.header('mlecchita-vikalpa - the Art of Secret Writing')
 
 st.markdown(
     """
@@ -26,12 +24,11 @@ st.markdown(
 
 snippet = '''
 alphabet = string.ascii_lowercase
-st.write('alphabet: {}'.format(alphabet))
 '''
 st.code(snippet)
 
 # alphabet
-alphabet = GenerateAlphabet()
+alphabet = generate_alphabet()
 st.markdown(':blue[alphabet:] {}'.format(alphabet))
 
 st.markdown(
@@ -45,8 +42,6 @@ st.markdown(
     """
 )
 snippet = '''
-def GenerateCipherSets(alphabet):
-    random.seed()
     # select half of the characters in the alphabet randomly in Set #1
     setLen = int(len(alphabet) / 2)
     set1 = random.sample(alphabet, k=setLen)
@@ -55,11 +50,10 @@ def GenerateCipherSets(alphabet):
     for l in alphabet:
         if l not in set1:
             set2.append(l)
-    return [set1, set2]
 '''
 st.code(snippet)
 
-cipherSets = GenerateCipherSets(alphabet)
+cipherSets = mv_generate_cipher_sets(alphabet)
 st.markdown("""#### Cipher Alphabet 
 
 Each character in Set 1 is paired with a character in Set 2, and vice-versa.""")
@@ -78,28 +72,28 @@ This is a simple cipher that replaces each letter in the message by its partner 
 in the alphabet will be lost.""")
 
 snippet = '''
-def CipherMlecchitaVikalpa(input, alphabet, cipherSet1, cipherSet2):
+def cipher_mlecchita_vikalpa(message, alphabet, cipherset1, cipherset2):
     output = ""
-    for p in input:
+    for p in message:
         if p in alphabet:  # any non-alphabethic character will be lost
             inx = -1
             c = ""
-            if p in cipherSet1:
-                inx = cipherSet1.index(p)
-                c = cipherSet2[inx]
+            if p in cipherset1:
+                inx = cipherset1.index(p)
+                c = cipherset2[inx]
             else:
-                inx = cipherSet2.index(p)
-                c = cipherSet1[inx]
+                inx = cipherset2.index(p)
+                c = cipherset1[inx]
             output += c
-    return output90
+    return output
 '''
 st.code(snippet)
 
 st.markdown("""### 4. Let's encrypt a message to test our algorithm""")
 
 message = st.text_input('Enter your message', '')
-ciphertext = CipherMlecchitaVikalpa(message, alphabet, cipherSets[0], cipherSets[1])
-decipheredtext = CipherMlecchitaVikalpa(ciphertext, alphabet, cipherSets[0], cipherSets[1])
+ciphertext = cipher_mlecchita_vikalpa(message, alphabet, cipherSets[0], cipherSets[1])
+decipheredtext = cipher_mlecchita_vikalpa(ciphertext, alphabet, cipherSets[0], cipherSets[1])
 
 st.markdown(":blue[plaintext:]\t{}".format(message))
 st.markdown(":blue[ciphertext:]\t:red[*{}*]".format(ciphertext))
@@ -109,10 +103,10 @@ st.markdown(
     To decipher the message we simply repeat the process with the cipher text and the same alphabet sets.
     """
 )
-
 st.write(":blue[deciphered text]:\t{}".format(decipheredtext))
 
 st.markdown("""
+---
 #### References:
 
 [1] Singh, Simon, The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography. New York, Anchor Books, 2000. Singh, Simon. The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography.
