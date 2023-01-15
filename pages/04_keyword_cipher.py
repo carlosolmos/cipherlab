@@ -2,22 +2,16 @@ import streamlit as st
 from cryptography.common import *
 from cryptography.generalsubstitution import *
 
-st.header("General substitution cipher")
+st.header("General substitution with Keyword cipher")
 
-st.markdown("""
-The strength of a cipher system depends on keeping the *key* secret and on having a wide range of potential keys [1].
-The Caesar Cipher is not very strong because it only has 25 possible keys (shift positions) but if instead we allow for any
-possible combination of the plain alphabet, then we would have an immense set of keys:
-
-  *P(n,r) = P(26,26) = 403291461126605635584000000*
-  
+"""
 ## Implementation
     
 ### 1. The Plain Alphabet
 
 We establish the valid plain alphabet. Let's take, for example, the 26 letters in the english 
 language alphabet.
-""")
+"""
 
 # alphabet
 plain_alphabet = generate_alphabet()
@@ -26,13 +20,12 @@ st.markdown(':blue[Plain alphabet:] {}'.format(pa))
 
 st.markdown("""
 ### 2. The Key
-A random sequence of the characters in the plain alphabet 
+* Start with an alphabetic keyword or key phrase. Ideally something simple, easy to remember.
+* Remove all characters not present in the plain alphabet -like spaces- and repeated letters.
+* Follow the keyword with the remaining letters of the alphabet in order, beginning with the last letter of the keyword.  
 """)
-
-cipher_alphabet = gs_generate_cipher(pa)
-
-if st.button('Push to re-generate the Key'):
-    cipher_alphabet = gs_generate_cipher(pa)
+keyword = st.text_input('Enter your keyword or key phrase (max 26 letters)', '')
+cipher_alphabet = gs_generate_cipher_with_keyword(keyword, pa)
 
 st.markdown(':blue[Key (cipher alphabet):] {}'.format(cipher_alphabet))
 
@@ -57,7 +50,7 @@ st.markdown("""### 4. Let's encrypt a message to test the algorithm""")
 
 message = st.text_input('Enter your message', '')
 ciphertext = cipher_substitution(message, plain_alphabet, cipher_alphabet)
-decipheredtext = cipher_substitution(ciphertext, cipher_alphabet, plain_alphabet)
+deciphered = cipher_substitution(ciphertext, cipher_alphabet, plain_alphabet)
 
 st.markdown(":blue[plaintext:]\t{}".format(message))
 st.markdown(":blue[ciphertext:]\t:red[*{}*]".format(ciphertext))
@@ -67,7 +60,7 @@ st.markdown(
     To decipher the message we simply have to reverse the process switching the alphabets.
     """
 )
-st.write(":blue[deciphered text]:\t{}".format(decipheredtext))
+st.write(":blue[deciphered text]:\t{}".format(deciphered))
 
 
 st.markdown("""
@@ -76,4 +69,3 @@ st.markdown("""
 
 [1] Singh, Simon, The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography. New York, Anchor Books, 2000. Singh, Simon. The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography.
 """)
-
