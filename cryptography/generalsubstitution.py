@@ -38,3 +38,15 @@ def gs_generate_cipher_with_nulls(nulls_set: str, alphabet: list):
         for n in nulls_list:
             cipher['nulls'].append(n.strip())
     return cipher
+
+
+def gs_generate_nomenclator(code_set: str, alphabet: list):
+    cipher = {'alphabet': random.sample(alphabet, len(alphabet)), 'codewords': {}}
+    code_set = code_set.lower()
+    code_list = code_set.split(',')
+    if len(code_list) > 0:
+        for kv in code_list:
+            code_pair = kv.split("=")
+            if len(code_pair) == 2:
+               cipher['codewords'][code_pair[0]] = code_pair[1]
+    return cipher

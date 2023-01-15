@@ -97,12 +97,11 @@ message = st.text_input('Enter your message:', '')
 ciphertext = cipher_substitution_with_nulls(message, plain_alphabet, cipher_alphabet['alphabet'],
                                             cipher_alphabet['nulls'])
 deciphered = decipher_substitution_with_nulls(ciphertext, cipher_alphabet['alphabet'], plain_alphabet,
-                                            cipher_alphabet['nulls'])
+                                              cipher_alphabet['nulls'])
 
 st.markdown(":blue[plaintext:]\t{}".format(message))
 st.markdown(":blue[ciphertext:]\t:red[*{}*]".format(ciphertext))
 st.write(":blue[deciphered text]:\t{}".format(deciphered))
-
 
 st.markdown("""
 ---
@@ -110,5 +109,3 @@ st.markdown("""
 
 [1] Singh, Simon, The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography. New York, Anchor Books, 2000. Singh, Simon. The Code Book: The Science of Secrecy From Ancient Egypt to Quantum Cryptography.
 """)
-
-
