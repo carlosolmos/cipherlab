@@ -72,7 +72,7 @@ This is a simple cipher that replaces each letter in the message by its partner 
 in the alphabet will be lost.""")
 
 snippet = '''
-def cipher_mlecchita_vikalpa(message, alphabet, cipherset1, cipherset2):
+def cipher_mlecchita_vikalpa(message: str, alphabet: list, cipherset1: list, cipherset2: list):
     output = ""
     for p in message:
         if p in alphabet:  # any non-alphabethic character will be lost

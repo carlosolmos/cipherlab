@@ -56,7 +56,7 @@ st.markdown("""
 Substitute each character in the message for the corresponding position in the cipher alphabet.
 """)
 snippet = '''
-def cipher_substitution(message, message_alphabet, cipher_alphabet):
+def cipher_substitution(message: str, message_alphabet: list, cipher_alphabet: list):
     output = ""
     for p in message:
         if p in message_alphabet:

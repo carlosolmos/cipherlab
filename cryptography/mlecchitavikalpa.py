@@ -1,7 +1,7 @@
 import random
 
 
-def cipher_mlecchita_vikalpa(message, alphabet, cipherset1, cipherset2):
+def cipher_mlecchita_vikalpa(message: str, alphabet: list, cipherset1: list, cipherset2: list):
     output = ""
     for p in message:
         if p in alphabet:  # any non-alphabethic character will be lost
@@ -18,7 +18,7 @@ def cipher_mlecchita_vikalpa(message, alphabet, cipherset1, cipherset2):
     return output
 
 
-def mv_generate_cipher_sets(alphabet):
+def mv_generate_cipher_sets(alphabet: list):
     random.seed()
     # select half of the characters in the alphabet randomly in Set #1
     setLen = int(len(alphabet) / 2)
