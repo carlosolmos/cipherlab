@@ -40,6 +40,9 @@ Substitute each character in the message for the corresponding position in the c
 snippet = '''
 def cipher_substitution(message: str, message_alphabet: list, cipher_alphabet: list):
     output = ""
+    if len(message) == 0:
+        return output
+    message = message.lower()
     for p in message:
         if p in message_alphabet:
             inx = message_alphabet.index(p)

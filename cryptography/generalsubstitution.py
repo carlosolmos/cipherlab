@@ -28,3 +28,13 @@ def gs_generate_cipher_with_keyword(keyword: str, alphabet: list):
             cipher_alphabet.append(c)
         letter_inx = (letter_inx + 1) % alphabet_len
     return cipher_alphabet
+
+
+def gs_generate_cipher_with_nulls(nulls_set: str, alphabet: list):
+    random.seed()
+    cipher = {'alphabet': random.sample(alphabet, len(alphabet)), 'nulls': []}
+    nulls_list = nulls_set.split(',')
+    if len(nulls_list) > 0:
+        for n in nulls_list:
+            cipher['nulls'].append(n.strip())
+    return cipher

@@ -3,6 +3,9 @@ import random
 
 def cipher_mlecchita_vikalpa(message: str, alphabet: list, cipherset1: list, cipherset2: list):
     output = ""
+    if len(message) == 0:
+        return output
+    message = message.lower()
     for p in message:
         if p in alphabet:  # any non-alphabethic character will be lost
             inx = -1
