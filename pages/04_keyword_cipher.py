@@ -5,6 +5,10 @@ from cryptography.generalsubstitution import *
 st.header("General substitution with Keyword cipher")
 
 """
+A long random key provides robust security for substitution ciphers. However, a key that is easier \
+to remember and avoids misunderstandings could be a better option. If we are willing to have a \
+smaller number of potential keys, we can use a simple keyword or key phrase as the basis of the key.
+
 ## Implementation
     
 ### 1. The Plain Alphabet
