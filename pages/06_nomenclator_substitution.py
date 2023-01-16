@@ -8,9 +8,13 @@ st.markdown("""
 Another improvement to the monoalphabetic substitution cipher consisted of the inclusion \
 of codes or codewords. A code is a substitution at the level of words. The combination \
 of a cipher alphabet with a set of codewords is known as ***Nomenclator***. With a nomenclator,  \
-the cipher alphabet encrypts most of the message except for the codewords. While adding \
-codewords increases the complexity of the cipher text, it does not increase the overall \
-strength of the encryption, which is still vulnerable to frequency analysis.
+the cipher alphabet encrypts most of the message except for the codewords. One of the most
+famous nomenclators in history is the Mary Queen of Scots Cipher used by her and her
+co-conspirators in the Babington Plot. An online version of the cipher is available here
+https://www.dcode.fr/mary-stuart-code.
+While adding codewords increases the complexity of the cipher text, it does not increase the overall
+strength of the encryption, which is still vulnerable to frequency analysis. Mary and her
+supporters' cipher was cracked by Queen Elizabeth's cryptanalysts, and that brought their downfall.
 
 ## Implementation
     
